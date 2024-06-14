@@ -1,0 +1,8 @@
+services:
+  selfie-service:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - YOLO_VERSION=yolov8n-seg.pt
+      - REVISION=docker
