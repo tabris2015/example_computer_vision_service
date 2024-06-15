@@ -45,6 +45,11 @@ def process_selfie(
     image_array = get_image_array(file)
     match task:
         case ProcessingType.remove_background:
+            if bg_red is None or bg_green is None or bg_blue is None:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, 
+                    detail="Colors cannot be NULL"
+                )
             processed_image = processor.remove_background(image_array, (bg_red, bg_green, bg_blue))
         case ProcessingType.blur_background:
             processed_image = processor.blur_background(image_array)
